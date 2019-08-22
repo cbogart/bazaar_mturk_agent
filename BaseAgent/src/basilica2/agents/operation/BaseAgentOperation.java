@@ -77,7 +77,7 @@ public class BaseAgentOperation extends AgentOperation
 	protected String env_actor_name;
 	protected String agent_definition_file;
 	protected boolean use_debug_ui = true;
-	protected BaseAgentUI myUI;
+	protected BaseAgentOptionalUI myUI;
 	protected AgentFactory myAgentFactory = new AgentFactory();
 	protected Map<String, AgentUI> myAgentUIs;
 	protected List<String> roomnameQueue;
@@ -211,7 +211,9 @@ public class BaseAgentOperation extends AgentOperation
 		log(Logger.LOG_LOW, "Starting new Agent");
 		a.start();
 
-		myUI.addAgentWidget(a.getName(), new AgentWidget(input));
+		String an = a.getName();
+		AgentWidget aw = new AgentWidget(input);
+		myUI.addAgentWidget(an, aw); //a.getName(), new AgentWidget(input));
 		myUI.agentLaunched(a.getName());
 		log(Logger.LOG_NORMAL, "notified UI of agent launch for "+a.getName());
 	}
@@ -253,7 +255,7 @@ public class BaseAgentOperation extends AgentOperation
 		log(Logger.LOG_LOW, "Removed. " + myAgents.size() + " agents now working");
 	}
 
-	@Override
+	
 	public void tick()
 	{
 		myUI.tick();
@@ -271,7 +273,7 @@ public class BaseAgentOperation extends AgentOperation
 
 	}
 
-	public void setUI(BaseAgentUI u)
+	public void setUI(BaseAgentOptionalUI u)
 	{
 		myUI = u;
 	}

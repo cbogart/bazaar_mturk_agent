@@ -53,7 +53,7 @@ import edu.cmu.cs.lti.project911.utils.log.Logger;
  * 
  * @author dadamson
  */
-public class BaseAgentUI extends javax.swing.JFrame
+public class BaseAgentUI extends javax.swing.JFrame implements BaseAgentOptionalUI
 {
 
 	BaseAgentOperation myOperation;
@@ -235,6 +235,7 @@ public class BaseAgentUI extends javax.swing.JFrame
 		launchButtonActionPerformed(evt);
 	}// GEN-LAST:event_roomNameTextFieldActionPerformed
 
+	@Override
 	public void agentLaunched(String agent_name)
 	{
 		myListModel.addElement(agent_name);
@@ -243,6 +244,7 @@ public class BaseAgentUI extends javax.swing.JFrame
 		this.enableAgentConfiguration(false);
 	}
 
+	@Override
 	public void agentStopped(String agent_name)
 	{
 		for (int i = 0; i < myListModel.getSize(); i++)
@@ -283,6 +285,7 @@ public class BaseAgentUI extends javax.swing.JFrame
 	// End of variables declaration//GEN-END:variables
 	private Map<String, AgentWidget> widgets = new HashMap<String, AgentWidget>();
 
+	@Override
 	public void addAgentWidget(String agentName, AgentWidget agentWidget)
 	{
 		widgets.put(agentName, agentWidget);
@@ -308,9 +311,11 @@ public class BaseAgentUI extends javax.swing.JFrame
 		}
 	}
 
+	@Override
 	public void setRoomName(String room)
 	{
 		this.roomNameTextField.setText(room);
 		
 	}
+	
 }
